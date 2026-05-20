@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Simulador de Montagem de CTO Responsivo</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>Simulador de Engenharia de Redes - CTO</h1>
+        <p>Clique ou arraste um conector verde para ligá-lo à respectiva saída drop.</p>
+    </header>
+
+    <main class="container">
+        <section class="control-panel">
+            <h3>Configuração da Caixa</h3>
+            <div class="radio-group">
+                <label class="radio-label">
+                    <input type="radio" name="cto-type" value="total" checked>
+                    <span>CTO Total (8 Portas Ativas)</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="cto-type" value="meio">
+                    <span>CTO Meio a Meio (4 Portas Ativas)</span>
+                </label>
+            </div>
+
+            <hr class="divider">
+
+            <h3>Ações Globais</h3>
+            <div class="action-group">
+                <button id="check-btn" class="btn-primary">Conferir Conexões</button>
+                <button id="reset-btn" class="btn-secondary">Resetar Montagem</button>
+            </div>
+
+            <div id="status-board" class="status-board hidden">
+                <h4>Relatório de Validação</h4>
+                <div id="status-list"></div>
+            </div>
+        </section>
+
+        <section class="cto-viewer">
+            <div class="cto-case">
+                
+                <svg id="fiber-svg-canvas" class="fiber-canvas"></svg>
+
+                <div class="cto-internal">
+                    
+                    <div class="splitter-tray">
+                        <div class="tray-brand">SPLITTER DISTRIBUTION TRAY</div>
+                        
+                        <div id="adapter-panel" class="adapter-panel">
+                            </div>
+
+                        <div class="fiber-routing">
+                            <div class="routing-circle"></div>
+                            <div class="routing-circle"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="cto-bottom-hardware">
+                        <div class="hardware-label">PAINEL DE SAÍDA DROP INFERIOR (PARES 1 A 8)</div>
+                        <div id="drop-output-panel" class="drop-output-panel">
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>Interface FTTH Responsiva - Controle Híbrido de Conexão</p>
+    </footer>
+
+    <script src="scripts/cto.js"></script>
+</body>
+</html>
