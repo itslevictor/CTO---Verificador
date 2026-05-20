@@ -21,15 +21,16 @@ function startApplication() {
                 { id: 'P5', label: '5' }, { id: 'P6', label: '6' }, 
                 { id: 'P7', label: '7' }, { id: 'P8', label: '8' }
             ],
+            // Correção do verificador modo Total: Cruzamento 1-5, 2-6, 3-7, 4-8, 5-1, 6-2, 7-3, 8-4
             outputs: [
-                { displayLabel: '1', expected: ['P1', null] },
-                { displayLabel: '2', expected: ['P2', null] },
-                { displayLabel: '3', expected: ['P3', null] },
-                { displayLabel: '4', expected: ['P4', null] },
-                { displayLabel: '5', expected: ['P5', null] },
-                { displayLabel: '6', expected: ['P6', null] },
-                { displayLabel: '7', expected: ['P7', null] },
-                { displayLabel: '8', expected: ['P8', null] }
+                { displayLabel: '1', expected: ['P5', null] },
+                { displayLabel: '2', expected: ['P6', null] },
+                { displayLabel: '3', expected: ['P7', null] },
+                { displayLabel: '4', expected: ['P8', null] },
+                { displayLabel: '5', expected: ['P1', null] },
+                { displayLabel: '6', expected: ['P2', null] },
+                { displayLabel: '7', expected: ['P3', null] },
+                { displayLabel: '8', expected: ['P4', null] }
             ]
         },
         meio: {
@@ -45,7 +46,6 @@ function startApplication() {
                 { id: 'P5B', label: '5B' }, { id: 'P6B', label: '6B' }, 
                 { id: 'P7B', label: '7B' }, { id: 'P8B', label: '8B' }
             ],
-            // Ajuste estrito do cruzamento: Saída 1 espera entrada 5 e ramal 1, etc.
             outputs: [
                 { displayLabel: '5C', expected: ['P1A', 'P5B'] },
                 { displayLabel: '6C', expected: ['P2A', 'P6B'] },
@@ -107,16 +107,10 @@ function startApplication() {
                 letter-spacing: 0.5px;
             }
             @media (orientation: portrait) {
-                .app-signature-avatar {
-                    width: 25vw;
-                    height: 25vw;
-                }
+                .app-signature-avatar { width: 25vw; height: 25vw; }
             }
             @media (orientation: landscape) {
-                .app-signature-avatar {
-                    width: 25vh;
-                    height: 25vh;
-                }
+                .app-signature-avatar { width: 25vh; height: 25vh; }
             }
         `;
         document.head.appendChild(style);
