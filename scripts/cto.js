@@ -45,6 +45,7 @@ function startApplication() {
                 { id: 'P5B', label: '5B' }, { id: 'P6B', label: '6B' }, 
                 { id: 'P7B', label: '7B' }, { id: 'P8B', label: '8B' }
             ],
+            // Gabarito ajustado para validar as conexões da primeira dupla abaixo
             outputs: [
                 { displayLabel: '1', expected: ['P1A', 'P5B'] },
                 { displayLabel: '2', expected: ['P2A', 'P6B'] },
@@ -105,7 +106,6 @@ function startApplication() {
                 font-weight: 500;
                 letter-spacing: 0.5px;
             }
-            /* Media queries estritos para proporção de 1/4 conforme a tela */
             @media (orientation: portrait) {
                 .app-signature-avatar {
                     width: 25vw;
@@ -123,7 +123,6 @@ function startApplication() {
     }
 
     function injectFooterSignature() {
-        // Evita duplicidade se renderizado múltiplas vezes
         if (document.getElementById('creator-signature-block')) return;
         
         const mainContainer = document.querySelector('main') || document.body;
