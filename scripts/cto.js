@@ -21,16 +21,16 @@ function startApplication() {
                 { id: 'P5', label: '5' }, { id: 'P6', label: '6' }, 
                 { id: 'P7', label: '7' }, { id: 'P8', label: '8' }
             ],
-            // Correção do verificador modo Total: Cruzamento 1-5, 2-6, 3-7, 4-8, 5-1, 6-2, 7-3, 8-4
+            // Padrão Físico Cruzado Obrigatório (Gabarito Oficial)
             outputs: [
-                { displayLabel: '1', expected: ['P5', null] },
-                { displayLabel: '2', expected: ['P6', null] },
-                { displayLabel: '3', expected: ['P7', null] },
-                { displayLabel: '4', expected: ['P8', null] },
-                { displayLabel: '5', expected: ['P1', null] },
-                { displayLabel: '6', expected: ['P2', null] },
-                { displayLabel: '7', expected: ['P3', null] },
-                { displayLabel: '8', expected: ['P4', null] }
+                { displayLabel: '1', expected: ['P5'] },
+                { displayLabel: '2', expected: ['P6'] },
+                { displayLabel: '3', expected: ['P7'] },
+                { displayLabel: '4', expected: ['P8'] },
+                { displayLabel: '5', expected: ['P1'] },
+                { displayLabel: '6', expected: ['P2'] },
+                { displayLabel: '7', expected: ['P3'] },
+                { displayLabel: '8', expected: ['P4'] }
             ]
         },
         meio: {
@@ -118,7 +118,6 @@ function startApplication() {
 
     function injectFooterSignature() {
         if (document.getElementById('creator-signature-block')) return;
-        
         const mainContainer = document.querySelector('main') || document.body;
         const footer = document.createElement('div');
         footer.id = 'creator-signature-block';
@@ -330,6 +329,7 @@ function startApplication() {
         });
     }
 
+    // Validador Strict Posicional corrigido para evitar falsos positivos
     function checkConfiguration() {
         const currentConfig = CONFIG[currentMode];
         if (!statusList || !statusBoard) return;
@@ -344,18 +344,20 @@ function startApplication() {
             slots.forEach(slot => {
                 const connector = slot.querySelector('.connector-optical');
                 if (connector) {
-                    currentConnected.push(connector.getAttribute('data-source-port'));
+                    currentConnected.push(connector.getAttribute('data-source-port').trim());
                 }
             });
 
-            const req1 = output.expected[0];
-            const req2 = output.expected[1];
-            
             let pairMatch = false;
-            if (req2 === null) {
-                pairMatch = currentConnected.includes(req1);
+
+            if (currentMode === 'total') {
+                const expectedPort = output.expected[0];
+                // Força correspondência estrita: deve conter a porta cruzada e não pode ter duplicados ou lixo linear
+                pairMatch = currentConnected.length === 1 && currentConnected[0] === expectedPort;
             } else {
-                pairMatch = currentConnected.includes(req1) && currentConnected.includes(req2) && currentConnected.length === 2;
+                const req1 = output.expected[0];
+                const req2 = output.expected[1];
+                pairMatch = currentConnected.length === 2 && currentConnected.includes(req1) && currentConnected.includes(req2);
             }
 
             slots.forEach(slot => {
