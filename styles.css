@@ -1,0 +1,374 @@
+:root {
+    --bg-color: #0b0b0d;
+    --panel-bg: #141417;
+    --cto-body: #111112;
+    --cto-border: #222225;
+    --tray-bg: #e6e9eb;
+    --sc-apc-green: #00b860;
+    --sc-apc-dark: #008545;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #2563eb;
+    --accent-selected: #f59e0b;
+    --danger: #ef4444;
+    --success: #22c55e;
+    --fiber-line: #10b981;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.app-header {
+    background-color: var(--panel-bg);
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #1e1e24;
+}
+
+.app-header h1 {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.app-header p {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    margin-top: 2px;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 12px;
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .container {
+        flex-direction: row;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .control-panel {
+        width: 300px;
+        min-width: 300px;
+    }
+}
+
+.control-panel {
+    background-color: var(--panel-bg);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #1e1e24;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.control-panel h3 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-left: 3px solid var(--accent);
+    padding-left: 6px;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    background: #1c1c21;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid #1e1e24;
+}
+
+.action-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border: none;
+}
+
+.btn-primary { background-color: var(--accent); color: #fff; }
+.btn-secondary { background-color: transparent; border: 1px solid var(--danger); color: var(--danger); }
+
+.status-board {
+    background: #1c1c21;
+    border-radius: 6px;
+    padding: 10px;
+    border: 1px solid #1e1e24;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.status-board h4 { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; }
+.status-item { font-size: 0.7rem; padding: 2px 0; }
+.hidden { display: none !important; }
+
+/* VIEWPORT DO SIMULADOR AUTOMATICAMENTE RESPONSIVA */
+.cto-viewer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #060607;
+    border-radius: 8px;
+    padding: 8px;
+    width: 100%;
+}
+
+/* Removido o 'width: 820px' rígido. Agora a caixa expande até 100% da área segura */
+.cto-case {
+    background-color: var(--cto-body);
+    border: 2px solid var(--cto-border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 720px; 
+    height: auto;
+    min-height: 480px;
+    padding: 12px;
+    position: relative;
+}
+
+.fiber-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.cto-internal {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.splitter-tray {
+    background-color: var(--tray-bg);
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tray-brand {
+    color: #475569;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.adapter-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-color: #cbd5e1;
+    padding: 4px;
+    border-radius: 6px;
+}
+
+.adapter-row {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 4px;
+}
+
+.slot-adapter {
+    background-color: #334155;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid #0f172a;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slot-label {
+    position: absolute;
+    bottom: 0px;
+    font-size: 7px;
+    color: #f8fafc;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+/* Ajuste proporcional dos conectores ópticos */
+.connector-optical {
+    background: linear-gradient(135deg, var(--sc-apc-green), var(--sc-apc-dark));
+    height: 28px;
+    width: 16px;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid #10b981;
+}
+
+.connector-optical.selected {
+    outline: 2px solid var(--accent-selected);
+    outline-offset: 1px;
+    box-shadow: 0 0 6px var(--accent-selected);
+}
+
+.connector-optical::after {
+    content: '';
+    width: 3px;
+    height: 4px;
+    background: #0f172a;
+    position: absolute;
+    bottom: -4px;
+    left: calc(50% - 1.5px);
+}
+
+.fiber-routing {
+    height: 35px;
+    border: 1px dashed #94a3b8;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.routing-circle {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #94a3b8;
+    border-radius: 50%;
+}
+
+.cto-bottom-hardware {
+    background-color: #161619;
+    border-radius: 6px;
+    border: 1px solid #27272a;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: auto;
+}
+
+.hardware-label {
+    font-size: 0.55rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Distribuição uniforme sem quebrar largura nas laterais */
+.drop-output-panel {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 4px;
+    width: 100%;
+}
+
+.pair-block {
+    background-color: #1e1e24;
+    border: 1px solid #2d2d35;
+    border-radius: 4px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0; /* Impede estouro de grid child */
+}
+
+.pair-title {
+    font-size: 8px;
+    text-align: center;
+    color: #94a3b8;
+    font-weight: bold;
+    background-color: #141417;
+    padding: 1px 0;
+    border-radius: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.pair-slots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    height: 36px;
+}
+
+.drop-target-slot {
+    background-color: #111113;
+    border: 1px dashed #3f3f46;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.drop-target-slot.drag-over {
+    background-color: rgba(37, 99, 235, 0.2);
+    border-color: var(--accent);
+}
+
+.slot-validation-mark {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    font-size: 9px;
+    background: #111113;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 30;
+}
+
+.app-footer {
+    background-color: var(--panel-bg);
+    text-align: center;
+    padding: 8px;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    border-top: 1px solid #1e1e24;
+}
