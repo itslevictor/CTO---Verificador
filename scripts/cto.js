@@ -45,16 +45,16 @@ function startApplication() {
                 { id: 'P5B', label: '5B' }, { id: 'P6B', label: '6B' }, 
                 { id: 'P7B', label: '7B' }, { id: 'P8B', label: '8B' }
             ],
-            // Gabarito ajustado para validar as conexões da primeira dupla abaixo
+            // Ajuste estrito do cruzamento: Saída 1 espera entrada 5 e ramal 1, etc.
             outputs: [
-                { displayLabel: '1', expected: ['P1A', 'P5B'] },
-                { displayLabel: '2', expected: ['P2A', 'P6B'] },
-                { displayLabel: '3', expected: ['P3A', 'P7B'] },
-                { displayLabel: '4', expected: ['P4A', 'P8B'] },
-                { displayLabel: '5', expected: ['P5A', 'P1B'] },
-                { displayLabel: '6', expected: ['P6A', 'P2B'] },
-                { displayLabel: '7', expected: ['P7A', 'P3B'] },
-                { displayLabel: '8', expected: ['P8A', 'P4B'] }
+                { displayLabel: '5C', expected: ['P1A', 'P5B'] },
+                { displayLabel: '6C', expected: ['P2A', 'P6B'] },
+                { displayLabel: '7C', expected: ['P3A', 'P7B'] },
+                { displayLabel: '8C', expected: ['P4A', 'P8B'] },
+                { displayLabel: '1C', expected: ['P5A', 'P1B'] },
+                { displayLabel: '2C', expected: ['P6A', 'P2B'] },
+                { displayLabel: '3C', expected: ['P7A', 'P3B'] },
+                { displayLabel: '4C', expected: ['P8A', 'P4B'] }
             ]
         }
     };
@@ -160,7 +160,7 @@ function startApplication() {
             adapterPanel.appendChild(rowElement);
 
             CONFIG.total.outputs.forEach((output, index) => {
-                dropOutputPanel.appendChild(createPairBlock(`${output.displayLabel} (1 e 2)`, index));
+                dropOutputPanel.appendChild(createPairBlock(`Saída ${output.displayLabel}`, index));
             });
         } else {
             const rowA = document.createElement('div');
@@ -179,7 +179,7 @@ function startApplication() {
             adapterPanel.appendChild(rowB);
 
             CONFIG.meio.outputs.forEach((output, index) => {
-                dropOutputPanel.appendChild(createPairBlock(`${output.displayLabel} (1 e 2)`, index));
+                dropOutputPanel.appendChild(createPairBlock(`${output.displayLabel}`, index));
             });
         }
 
@@ -212,7 +212,7 @@ function startApplication() {
 
         const title = document.createElement('div');
         title.classList.add('pair-title');
-        title.innerText = `Saída ${labelText}`;
+        title.innerText = labelText;
         pairBlock.appendChild(title);
 
         const slotsContainer = document.createElement('div');
@@ -378,7 +378,7 @@ function startApplication() {
             const logItem = document.createElement('div');
             logItem.classList.add('status-item');
             logItem.style.color = pairMatch ? 'var(--success)' : 'var(--danger)';
-            logItem.innerText = `Saída ${output.displayLabel} (1 e 2): ${pairMatch ? '✓ OK' : '✗ Falha'}`;
+            logItem.innerText = `Saída ${output.displayLabel}: ${pairMatch ? '✓ OK' : '✗ Falha'}`;
             statusList.appendChild(logItem);
         });
 
